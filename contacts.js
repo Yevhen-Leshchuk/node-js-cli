@@ -16,7 +16,10 @@ async function getContactById(contactId) {
   try {
     const data = await fs.readFile(contactsPath);
     const parsedData = JSON.parse(data);
-    const contact = parsedData.filter((contact) => contact.id === contactId);
+    const contact = parsedData.filter(
+      (contact) => contact.id === contactId.toString()
+    );
+    console.log(contact);
     return contact;
   } catch (error) {
     console.log(error);

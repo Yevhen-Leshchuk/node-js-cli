@@ -1,6 +1,27 @@
 const contacts = require('./contacts');
+const argv = require('yargs').argv;
 
-contacts.listContacts();
-// contacts.getContactById('13');
-// contacts.addContact('13', 'Daniella', 'deni@ukr.net', '777-77-77');
-// contacts.removeContact('13');
+function invokeAction({ action, id, name, email, phone }) {
+  switch (action) {
+    case 'list':
+      contacts.listContacts();
+      break;
+
+    case 'get':
+      contacts.getContactById(id);
+      break;
+
+    case 'add':
+      contacts.addContact(id, name, email, phone);
+      break;
+
+    case 'remove':
+      contacts.removeContact(id);
+      break;
+
+    default:
+      console.warn('\x1B[31m Unknown action type!');
+  }
+}
+
+invokeAction(argv);
